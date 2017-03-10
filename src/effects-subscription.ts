@@ -4,15 +4,13 @@ import { Observer } from 'rxjs/Observer';
 import { Subscription } from 'rxjs/Subscription';
 import { merge } from 'rxjs/observable/merge';
 import { mergeEffects } from './effects';
-import { Actions } from './actions';
-
-
+import { Action } from '@ngrx/store/src/dispatcher';
 export const effects = new OpaqueToken('ngrx/effects: Effects');
 
 @Injectable()
 export class EffectsSubscription extends Subscription implements OnDestroy {
   constructor(
-    @Inject(Store) private store: Observer<Actions>,
+    @Inject(Store) private store: Observer<Action>,
     @Optional() @SkipSelf() public parent: EffectsSubscription,
     @Optional() @Inject(effects) effectInstances?: any[]
   ) {
